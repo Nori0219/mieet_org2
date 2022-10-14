@@ -2,6 +2,10 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_attimuitehoi_app/model/imagePage.dart';
+import 'package:flutter_attimuitehoi_app/view/JankenPage.dart';
+import 'package:flutter_attimuitehoi_app/view/ResultPage.dart';
+import 'package:flutter_attimuitehoi_app/view/TopPage.dart';
 
 class YourHoiPage extends StatefulWidget {
   const YourHoiPage({Key? key}) : super(key: key);
@@ -14,65 +18,106 @@ class YourHoiPage extends StatefulWidget {
 
 
 class _YourHoiPageState extends State<YourHoiPage> {
-String computerHand = '✊';
-String myHand = '👊';
-String result ='引き分け';
+var computerDirection = People;
+String myFace = '🤔';
+String SecondResult ='やり直し';
 
 //文字列の変数はStringという型で定義する　最初は小文字で次は大文字
 
 //関数の定義
-void selectHnd(String selectHnd) {
-  myHand =selectHnd;
-  //print(selectHnd);
-  generateComputerHand();
+
+dynamic selectHnd(String selectHnd) {
+  myFace = handToFace(selectHnd);
+  print(selectHnd);
+  generateComputerDirection();
   judge();
+  next();
   setState(() {});
 }
 
 
-void generateComputerHand() {
-  final randomNumber = Random().nextInt(3);
-  computerHand = randomNumberToHand(randomNumber);
+void generateComputerDirection() {
+  final randomNumber = Random().nextInt(4);
+  computerDirection = randomNumberToHand(randomNumber);
   print(randomNumberToHand(randomNumber));
 }
 
-String randomNumberToHand(int randomNumber) {
+dynamic randomNumberToHand(int randomNumber) {
   switch (randomNumber) {
     case 0:
-      return '✊';
+      return Up;
     case 1:
-      return '✌';
+      return Down;
     case 2:
-      return '✋';
+      return Right;
+    case 3:
+      return Left;
     default:
-      return '✊';
+      return People;
+  }
+  
+}
+
+dynamic handToFace(String selectHnd) {
+  switch  (selectHnd){
+    case '👆':
+      return '🙄';
+    case '👇':
+      return '😌';
+    case '👉':
+      return '😏';
+    case '👈':
+      return '🧐';
+    default:
+      return '🤔';
   }
   
 }
 
 
+
 //  void judge() {
-//    if (computerHand == myHand) {
-//      result ='引き分け';
-//    } else if ( myHand == '✊' && computerHand == '✌') {
-//        result = '勝ち';
-//    } else if ( myHand == '✌' && computerHand == '✋') {
-//        result = '勝ち';
-//    } else if ( myHand == '✋' && computerHand == '✊') {
-//        result = '勝ち';
+//    if (computerDirection == myFace) {
+//      SecondResult ='引き分け';
+//    } else if ( myFace == '✊' && computerDirection == '✌') {
+//        SecondResult = '勝ち';
+//    } else if ( myFace == '✌' && computerDirection == '✋') {
+//        SecondResult = '勝ち';
+//    } else if ( myFace == '✋' && computerDirection == '✊') {
+//        SecondResult = '勝ち';
 //    }
 //  }
+
  void judge() {
-   if (computerHand == myHand) {
-     result ='引き分け';
-   } else if ( myHand == '✊' && computerHand == '✌'||
-       myHand == '✌' && computerHand == '✋'||
-       myHand == '✋' && computerHand == '✊') {
-       result = '勝ち';
+   if ( myFace == '🙄' && computerDirection == Up||
+       myFace == '😏' && computerDirection == Right||
+       myFace == '🧐' && computerDirection == Left||
+       myFace == '😌' && computerDirection == Down) {
+       SecondResult = '負け';
+       print('Lose');
    }else {
-    result = '負け';
+    SecondResult = 'やり直し';
    }
  }
+
+ void next(){
+    if (SecondResult == '負け') {
+      print('あなたの負けです');
+      Future.delayed(Duration(seconds: 2), () {
+      Navigator.push(context, MaterialPageRoute(builder:(context)  => ResultPage()));
+      
+      });
+      
+    } else if (SecondResult == 'やり直し'){
+      Future.delayed(Duration(seconds: 2), () {
+        print('あなたのやり直しです');
+      Navigator.push(context, MaterialPageRoute(builder:(context)  => JankenPage()));
+    });
+      
+    }else { 
+      
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -83,26 +128,15 @@ String randomNumberToHand(int randomNumber) {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,//縦のcenerに縦並び
               children: [
-                myHand == '👊' ?//初期値から代わると文字が代わる
+                myFace == '🤔' ?//初期値から代わると文字が代わる
                   Text('あっちむいて',style: TextStyle(fontSize: 50,),):Text('ホイ！',style: TextStyle(fontSize: 60,),),
                   SizedBox(
                     height: 25,
                   ),
-                  CircleAvatar(
-                    radius: 80,
-                    backgroundImage://　アイコンを変更　//URLの画像に設定
-                    NetworkImage('https://ukiuki.itembox.design/item/img/osaru/img_header_icon.png'),
-                  ),
-                  SizedBox(
-                    height: 30
-                    ,
-                  ),
-                // Text(
-                //   computerHand,//相手の手
-                //   style: TextStyle(
-                //     fontSize: 70,
-                //   ),
-                //   ),
+                  Container( 
+                    height: 200,
+                    child: computerDirection),
+                
                   Container(
                     height: 100,
                     child:Row(
@@ -128,7 +162,7 @@ String randomNumberToHand(int randomNumber) {
                     )
                   ),
                 Text(
-                  myHand,
+                  myFace,
                   style: TextStyle(
                     fontSize: 80,
                   ),
@@ -158,7 +192,7 @@ String randomNumberToHand(int randomNumber) {
                           ElevatedButton(
                                 onPressed: (){
                                   selectHnd('👆');
-                                  // myHand ='✌';
+                                  // myFace ='✌';
                                   // print('✌');
                                   // setState(() {});
                                 },
@@ -172,7 +206,7 @@ String randomNumberToHand(int randomNumber) {
                               ElevatedButton(
                                 onPressed: (){
                                   selectHnd('👈');
-                                  // myHand ='✌';
+                                  // myFace ='✌';
                                   // print('✌');
                                   // setState(() {});
                                 },
@@ -182,7 +216,7 @@ String randomNumberToHand(int randomNumber) {
                               ElevatedButton(
                                 onPressed: (){
                                   selectHnd('👉');
-                                  // myHand ='✋';
+                                  // myFace ='✋';
                                   // print('✋');👉
                                   // setState(() {});
                                 },
@@ -194,7 +228,7 @@ String randomNumberToHand(int randomNumber) {
                           ElevatedButton(
                             onPressed: (){
                               selectHnd('👇');
-                              // myHand ='✌';
+                              // myFace ='✌';
                               // print('✌');
                               // setState(() {});
                             },

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_attimuitehoi_app/view/JankenPage.dart';
+import 'package:flutter_attimuitehoi_app/view/TopPage.dart';
 import 'package:flutter_attimuitehoi_app/view/screan.dart';
 
 void main() {
@@ -12,7 +13,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Screen(),
+      home: TopPage(),
     );
   }
 }

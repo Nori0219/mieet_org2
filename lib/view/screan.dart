@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_attimuitehoi_app/view/TopPage.dart';
 import 'package:flutter_attimuitehoi_app/view/MyHoiPage.dart';
 import 'package:flutter_attimuitehoi_app/view/JankenPage.dart';
+import 'package:flutter_attimuitehoi_app/view/YourHoiPage.dart';
 
 class Screen extends StatefulWidget {
   const Screen({Key? key}) : super(key: key);
@@ -12,7 +14,7 @@ class Screen extends StatefulWidget {
 
 class _ScreenState extends State<Screen> {
   int selectedIndex = 0;//選択している状態を表す0はホームアイコン,1はアカウントアイコン
-  List<Widget> pageList = [JankenPage(),MyHoiPage()];//それぞれの状態で表示するページを設定
+  List<Widget> pageList = [JankenPage(),MyHoiPage(),YourHoiPage()];//それぞれの状態で表示するページを設定
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +28,10 @@ class _ScreenState extends State<Screen> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.perm_identity_outlined),
+            label: ''
+          ),
+           BottomNavigationBarItem(
+            icon: Icon(Icons.handshake),
             label: ''
           ),
         ],

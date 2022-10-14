@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_attimuitehoi_app/model/imagePage.dart';
 import 'package:flutter_attimuitehoi_app/view/MyHoiPage.dart';
 import 'package:flutter_attimuitehoi_app/view/YourHoiPage.dart';
 
@@ -18,7 +19,7 @@ class _JankenPageState extends State<JankenPage> {
 //ホットリロードの対象外であるので右上のリロードボタンを押す
 String computerHand = '👐';
 String myHand = '✋';
-String result ='引き分け';
+String FirstResult ='引き分け';
 String JankenVoice = '最初はグーじゃんけん';
 
 
@@ -58,36 +59,36 @@ String randomNumberToHand(int randomNumber) {
 
 //  void judge() {
 //    if (computerHand == myHand) {
-//      result ='引き分け';
+//      FirstResult ='引き分け';
 //    } else if ( myHand == '✊' && computerHand == '✌') {
-//        result = '勝ち';
+//        FirstResult = '勝ち';
 //    } else if ( myHand == '✌' && computerHand == '✋') {
-//        result = '勝ち';
+//        FirstResult = '勝ち';
 //    } else if ( myHand == '✋' && computerHand == '✊') {
-//        result = '勝ち';
+//        FirstResult = '勝ち';
 //    }
 //  }
  void judge() {
    if (computerHand == myHand) {
-     result ='引き分け';
+     FirstResult ='引き分け';
    } else if ( myHand == '✊' && computerHand == '✌'||
        myHand == '✌' && computerHand == '✋'||
        myHand == '✋' && computerHand == '✊') {
-       result = '勝ち';
+       FirstResult = '勝ち';
    }else {
-    result = '負け';
+    FirstResult = '負け';
    }
  }
 
   void next(){
-    if (result == '勝ち') {
+    if (FirstResult == '勝ち') {
       Future.delayed(Duration(seconds: 2), () {
-     // Navigator.push(context, MaterialPageRoute(builder:(context)  => MyHoiPage()));
+      Navigator.push(context, MaterialPageRoute(builder:(context)  => MyHoiPage()));
       });
       
-    } else if (result == '負け'){
+    } else if (FirstResult == '負け'){
       Future.delayed(Duration(seconds: 2), () {
-     // Navigator.push(context, MaterialPageRoute(builder:(context)  => YourHoiPage()));
+      Navigator.push(context, MaterialPageRoute(builder:(context)  => YourHoiPage()));
     });
       
     }else { 
@@ -96,10 +97,10 @@ String randomNumberToHand(int randomNumber) {
   }
 
 Text JankenVoiceText() { // Textウィジェットを返す関数
-  if (result == '引き分け') {
-    return Text(JankenVoice,style: TextStyle(fontSize: 40,),);
+  if (FirstResult == '引き分け') {
+    return Text(JankenVoice,style: TextStyle(fontSize: 42,),);
   } else {
-    return Text('ポン！',style: TextStyle(fontSize: 40,),);
+    return Text('ポン！',style: TextStyle(fontSize: 42,),);
   }
 }
 
@@ -124,11 +125,9 @@ Text JankenVoiceText() { // Textウィジェットを返す関数
                       height: 40
                       ,
                     ),
-                    CircleAvatar(
-                      radius: 80,
-                      backgroundImage://　アイコンを変更　//URLの画像に設定
-                      NetworkImage('https://ukiuki.itembox.design/item/img/osaru/img_header_icon.png'),
-                      
+                    Container( //人のイラスト
+                    height: 200,
+                    child: People
                     ),
                     SizedBox(
                       height: 30

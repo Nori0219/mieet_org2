@@ -2,6 +2,9 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_attimuitehoi_app/model/imagePage.dart';
+import 'package:flutter_attimuitehoi_app/view/JankenPage.dart';
+import 'package:flutter_attimuitehoi_app/view/ResultPage.dart';
 
 class MyHoiPage extends StatefulWidget {
   const MyHoiPage({Key? key}) : super(key: key);
@@ -14,65 +17,88 @@ class MyHoiPage extends StatefulWidget {
 
 
 class _MyHoiPageState extends State<MyHoiPage> {
-String computerFace = '✊';
+var computerFace = People;
 String myHand = '👊';
-String result ='引き分け';
+String SecondResult ='やり直し';
 
 //文字列の変数はStringという型で定義する　最初は小文字で次は大文字
 
 //関数の定義
 void selectHnd(String selectHnd) {
   myHand =selectHnd;
-  //print(selectHnd);
   generateComputerFace();
   judge();
+  next();
   setState(() {});
 }
 
 
 void generateComputerFace() {
-  final randomNumber = Random().nextInt(3);
-  computerFace = randomNumberToHand(randomNumber);
-  print(randomNumberToHand(randomNumber));
+  final randomNumber = Random().nextInt(4);
+  computerFace = randomNumberToFace(randomNumber);
+  print(randomNumberToFace(randomNumber));
 }
 
-String randomNumberToHand(int randomNumber) {
+dynamic randomNumberToFace(int randomNumber) {
   switch (randomNumber) {
     case 0:
-      return '✊';
+      return Up;
     case 1:
-      return '✌';
+      return Down;
     case 2:
-      return '✋';
+      return Right;
+    case 3:
+      return Left;
     default:
-      return '✊';
+      return People;
   }
   
 }
 
 
+
+
 //  void judge() {
 //    if (computerFace == myHand) {
-//      result ='引き分け';
+//      SecondResult ='引き分け';
 //    } else if ( myHand == '✊' && computerFace == '✌') {
-//        result = '勝ち';
+//        SecondResult = '勝ち';
 //    } else if ( myHand == '✌' && computerFace == '✋') {
-//        result = '勝ち';
+//        SecondResult = '勝ち';
 //    } else if ( myHand == '✋' && computerFace == '✊') {
-//        result = '勝ち';
+//        SecondResult = '勝ち';
 //    }
 //  }
  void judge() {
-   if (computerFace == myHand) {
-     result ='引き分け';
-   } else if ( myHand == '✊' && computerFace == '✌'||
-       myHand == '✌' && computerFace == '✋'||
-       myHand == '✋' && computerFace == '✊') {
-       result = '勝ち';
+   if ( myHand == '👆' && computerFace == Up||
+       myHand == '👉' && computerFace == Right||
+       myHand == '👈' && computerFace == Left||
+       myHand == '👇' && computerFace == Down) {
+       SecondResult = '勝ち';
+       print('Win');
    }else {
-    result = '負け';
+    SecondResult = 'やり直し';
+    print('やり直し');
    }
  }
+
+ void next(){
+    if (SecondResult == '勝ち') {
+      print('あなたの勝ちです');
+      Future.delayed(Duration(seconds: 2), () {
+      Navigator.push(context, MaterialPageRoute(builder:(context)  => ResultPage()));
+      });
+      
+    } else if (SecondResult == 'やり直し'){
+      print('やり直しです');
+      Future.delayed(Duration(seconds: 2), () {
+      Navigator.push(context, MaterialPageRoute(builder:(context)  => JankenPage()));
+    });
+      
+    }else { 
+
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -88,21 +114,19 @@ String randomNumberToHand(int randomNumber) {
                   SizedBox(
                     height: 25,
                   ),
-                  CircleAvatar(
-                    radius: 80,
-                    backgroundImage://　アイコンを変更　//URLの画像に設定
-                    NetworkImage('https://ukiuki.itembox.design/item/img/osaru/img_header_icon.png'),
-                  ),
-                  SizedBox(
-                    height: 30
-                    ,
-                  ),
-                Text(
-                  computerFace,//相手の手
-                  style: TextStyle(
-                    fontSize: 70,
-                  ),
-                  ),
+                  // CircleAvatar(
+                  //   radius: 80,
+                  //   backgroundImage://　アイコンを変更　//URLの画像に設定
+                  //   NetworkImage('https://ukiuki.itembox.design/item/img/osaru/img_header_icon.png'),
+                  // ),
+                  // SizedBox(
+                  //   height: 30
+                  //   ,
+                  // ),
+                  Container( 
+                    height: 200,
+                    child: computerFace),
+                
                   Container(
                     height: 100,
                     child:Row(
