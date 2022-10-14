@@ -14,7 +14,7 @@ class MyHoiPage extends StatefulWidget {
 
 
 class _MyHoiPageState extends State<MyHoiPage> {
-String computerHand = '✊';
+String computerFace = '✊';
 String myHand = '👊';
 String result ='引き分け';
 
@@ -24,15 +24,15 @@ String result ='引き分け';
 void selectHnd(String selectHnd) {
   myHand =selectHnd;
   //print(selectHnd);
-  generateComputerHand();
+  generateComputerFace();
   judge();
   setState(() {});
 }
 
 
-void generateComputerHand() {
+void generateComputerFace() {
   final randomNumber = Random().nextInt(3);
-  computerHand = randomNumberToHand(randomNumber);
+  computerFace = randomNumberToHand(randomNumber);
   print(randomNumberToHand(randomNumber));
 }
 
@@ -52,22 +52,22 @@ String randomNumberToHand(int randomNumber) {
 
 
 //  void judge() {
-//    if (computerHand == myHand) {
+//    if (computerFace == myHand) {
 //      result ='引き分け';
-//    } else if ( myHand == '✊' && computerHand == '✌') {
+//    } else if ( myHand == '✊' && computerFace == '✌') {
 //        result = '勝ち';
-//    } else if ( myHand == '✌' && computerHand == '✋') {
+//    } else if ( myHand == '✌' && computerFace == '✋') {
 //        result = '勝ち';
-//    } else if ( myHand == '✋' && computerHand == '✊') {
+//    } else if ( myHand == '✋' && computerFace == '✊') {
 //        result = '勝ち';
 //    }
 //  }
  void judge() {
-   if (computerHand == myHand) {
+   if (computerFace == myHand) {
      result ='引き分け';
-   } else if ( myHand == '✊' && computerHand == '✌'||
-       myHand == '✌' && computerHand == '✋'||
-       myHand == '✋' && computerHand == '✊') {
+   } else if ( myHand == '✊' && computerFace == '✌'||
+       myHand == '✌' && computerFace == '✋'||
+       myHand == '✋' && computerFace == '✊') {
        result = '勝ち';
    }else {
     result = '負け';
@@ -97,12 +97,12 @@ String randomNumberToHand(int randomNumber) {
                     height: 30
                     ,
                   ),
-                // Text(
-                //   computerHand,//相手の手
-                //   style: TextStyle(
-                //     fontSize: 70,
-                //   ),
-                //   ),
+                Text(
+                  computerFace,//相手の手
+                  style: TextStyle(
+                    fontSize: 70,
+                  ),
+                  ),
                   Container(
                     height: 100,
                     child:Row(

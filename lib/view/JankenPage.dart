@@ -18,9 +18,8 @@ class _JankenPageState extends State<JankenPage> {
 //ホットリロードの対象外であるので右上のリロードボタンを押す
 String computerHand = '👐';
 String myHand = '✋';
-String result ='勝ち';
-String ready = '最初はグーじゃんけん';
-int ReadyState = 0;
+String result ='引き分け';
+String JankenVoice = '最初はグーじゃんけん';
 
 
 //文字列の変数はStringという型で定義する　最初は小文字で次は大文字
@@ -82,25 +81,27 @@ String randomNumberToHand(int randomNumber) {
 
   void next(){
     if (result == '勝ち') {
-      ReadyState = 1;
       Future.delayed(Duration(seconds: 2), () {
      // Navigator.push(context, MaterialPageRoute(builder:(context)  => MyHoiPage()));
       });
       
     } else if (result == '負け'){
-      ReadyState = 1;
       Future.delayed(Duration(seconds: 2), () {
      // Navigator.push(context, MaterialPageRoute(builder:(context)  => YourHoiPage()));
     });
       
     }else { 
-      Future.delayed(Duration(seconds: 2), () {
-
-      });
-      ReadyState = 0;
-      ready = '勝負で';
+      JankenVoice = '勝負で';
     }
   }
+
+Text JankenVoiceText() { // Textウィジェットを返す関数
+  if (result == '引き分け') {
+    return Text(JankenVoice,style: TextStyle(fontSize: 40,),);
+  } else {
+    return Text('ポン！',style: TextStyle(fontSize: 40,),);
+  }
+}
 
   @override
   Widget build(BuildContext context) {
@@ -116,8 +117,9 @@ String randomNumberToHand(int randomNumber) {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,//縦のcenerに縦並び
                 children: [
-                  ReadyState == 0 ?//初期値から代わると文字が代わる
-                  Text(ready,style: TextStyle(fontSize: 40,),):Text('ポン！',style: TextStyle(fontSize: 60,),),
+                  JankenVoiceText(),
+                  // ReadyState == 0 ?//初期値から代わると文字が代わる
+                  // Text(ready,style: TextStyle(fontSize: 40,),):Text('ポン！',style: TextStyle(fontSize: 60,),),
                     SizedBox(
                       height: 40
                       ,
