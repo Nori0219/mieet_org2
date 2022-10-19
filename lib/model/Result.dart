@@ -1,22 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_attimuitehoi_app/view/TopPage.dart';
+import 'package:flutter_attimuitehoi_app/view/MyHoiPage.dart';
+import 'package:flutter_attimuitehoi_app/view/YourHoiPage.dart';
+class Result extends StatelessWidget {
+  
 
-class Result {
-  var firstResult;
-  var secondResult;
-}
-
-class ResultPage extends StatelessWidget {
-  final String result;
-  ResultPage(this.result);
-
-  @override
+  Future<void> goToTop(BuildContext context) async {
+    Navigator.push(context, MaterialPageRoute(builder:(context)  => TopPage()));
+  }
+@override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("item detail"),
-      ),
       body: Center(
-        child: Text("this page is item$result"),
+        child: Column(
+          //Columnの中に入れたものは縦に並べられる．Rowだと横に並べられる
+          mainAxisAlignment: MainAxisAlignment.center, //Coloumの中身を真ん中に配置
+          children: <Widget>[
+
+           // Text('$SecondResult'),
+
+            ElevatedButton(
+                onPressed: () async {
+                  await goToTop(context);
+                },
+                child: const Text('トップへ戻る')),
+          ],
+        ),
       ),
     );
   }

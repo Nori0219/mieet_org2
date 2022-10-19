@@ -1,0 +1,1 @@
+String FirstResult ='引き分け';

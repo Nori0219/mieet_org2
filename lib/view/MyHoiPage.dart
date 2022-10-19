@@ -2,6 +2,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_attimuitehoi_app/model/Hoi.dart';
 import 'package:flutter_attimuitehoi_app/model/imagePage.dart';
 import 'package:flutter_attimuitehoi_app/view/JankenPage.dart';
 import 'package:flutter_attimuitehoi_app/view/ResultPage.dart';
@@ -19,7 +20,7 @@ class MyHoiPage extends StatefulWidget {
 class _MyHoiPageState extends State<MyHoiPage> {
 var computerFace = People;
 String myHand = '👊';
-String SecondResult ='やり直し';
+// String SecondResult ='やり直し';
 
 //文字列の変数はStringという型で定義する　最初は小文字で次は大文字
 
@@ -103,6 +104,7 @@ dynamic randomNumberToFace(int randomNumber) {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor:  Color(0xFFffde59),
       body: SafeArea(
         child: Center(
           child: SingleChildScrollView(
