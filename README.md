@@ -1,4 +1,6 @@
-# flutter_attimuitehoi_app
+# あっちむいてほいアプリ
+![あっちむいてHoi-動画_AdobeExpress](https://user-images.githubusercontent.com/111294820/196626875-7c661698-e1c4-42e0-9bc8-475e15a7c371.gif)
+
 
 A new Flutter project.
 
