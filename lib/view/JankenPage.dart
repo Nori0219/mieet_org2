@@ -99,9 +99,9 @@ String randomNumberToHand(int randomNumber) {
 
 Text JankenVoiceText() { // Textウィジェットを返す関数
   if (FirstResult == '引き分け') {
-    return Text(JankenVoice,style: TextStyle(fontSize: 42,),);
+    return Text(JankenVoice,style: TextStyle(fontSize: 30,),);
   } else {
-    return Text('ポン！',style: TextStyle(fontSize: 42,),);
+    return Text('ポン！',style: TextStyle(fontSize: 30,),);
   }
 }
 
@@ -121,17 +121,9 @@ Text JankenVoiceText() { // Textウィジェットを返す関数
                     JankenVoiceText(),
                     // ReadyState == 0 ?//初期値から代わると文字が代わる
                     // Text(ready,style: TextStyle(fontSize: 40,),):Text('ポン！',style: TextStyle(fontSize: 60,),),
-                      SizedBox(
-                        height: 40
-                        ,
-                      ),
                       Container( //人のイラスト
                       height: 200,
                       child: People
-                      ),
-                      SizedBox(
-                        height: 30
-                        ,
                       ),
                     Text(
                       computerHand,//相手の手
@@ -140,25 +132,26 @@ Text JankenVoiceText() { // Textウィジェットを返す関数
                       ),
                       ),
                       Container(
-                        height: 100,
                         child:Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                          children: <Widget>[
-                          Container(
-                              color: Colors.black,
-                              height: 7,
-                              width: 140,
-                            ),
+                          Expanded(
+                            child: Container(
+                                color: Colors.black,
+                                height: 7,
+                              ),
+                          ),
                           const Text('VS',
                           style: TextStyle(
                             fontSize: 40,
                             fontWeight: FontWeight.bold
                           ),
                           textDirection: TextDirection.ltr,),
-                          Container(
-                            color: Colors.black,
-                            height: 7,
-                            width: 140,
+                          Expanded(
+                            child: Container(
+                              color: Colors.black,
+                              height: 7,
+                            ),
                           )
                           ],
                         )
@@ -168,11 +161,7 @@ Text JankenVoiceText() { // Textウィジェットを返す関数
                       style: TextStyle(
                         fontSize: 80,
                       ),
-                      ),
-                      Container(
-                        height: 50,//columとRawの間に隙間を取る
-                    
-                      ),
+                    ),
                     Container(
                       decoration: BoxDecoration(
                         color: Colors.blue[100],

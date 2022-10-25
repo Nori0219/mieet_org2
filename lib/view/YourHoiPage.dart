@@ -140,25 +140,26 @@ dynamic handToFace(String selectHnd) {
                     child: computerDirection),
                 
                   Container(
-                    height: 100,
                     child:Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                     children: <Widget>[
-                      Container(
-                          color: Colors.black,
-                          height: 7,
-                          width: 140,
-                        ),
+                      children: <Widget>[
+                      Expanded(
+                        child: Container(
+                            color: Colors.black,
+                            height: 7,
+                          ),
+                      ),
                       const Text('VS',
                       style: TextStyle(
                         fontSize: 40,
                         fontWeight: FontWeight.bold
                       ),
                       textDirection: TextDirection.ltr,),
-                      Container(
-                        color: Colors.black,
-                        height: 7,
-                        width: 140,
+                      Expanded(
+                        child: Container(
+                          color: Colors.black,
+                          height: 7,
+                        ),
                       )
                       ],
                     )
@@ -169,10 +170,7 @@ dynamic handToFace(String selectHnd) {
                     fontSize: 80,
                   ),
                   ),
-                  Container(
-                    height: 20,//columとRawの間に隙間を取る
-                
-                  ),
+                  
                 Container(
                   decoration: BoxDecoration(
                     color: Colors.blue[100],
@@ -227,15 +225,18 @@ dynamic handToFace(String selectHnd) {
                               ),
                             ],
                           ),
-                          ElevatedButton(
-                            onPressed: (){
-                              selectHnd('👇');
-                              // myFace ='✌';
-                              // print('✌');
-                              // setState(() {});
-                            },
-                            style: ElevatedButton.styleFrom(minimumSize: Size(70, 70),primary: Colors.white,elevation: 5,),
-                            child: Text('👇',style: TextStyle(fontSize: 30),),
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 13.0),
+                            child: ElevatedButton(
+                              onPressed: (){
+                                selectHnd('👇');
+                                // myFace ='✌';
+                                // print('✌');
+                                // setState(() {});
+                              },
+                              style: ElevatedButton.styleFrom(minimumSize: Size(70, 70),primary: Colors.white,elevation: 5,),
+                              child: Text('👇',style: TextStyle(fontSize: 30),),
+                            ),
                           ),
                         ],
                       ),
