@@ -113,55 +113,41 @@ dynamic randomNumberToFace(int randomNumber) {
               children: [
                 myHand == '👊' ?//初期値から代わると文字が代わる
                   Text('あっちむいて',style: TextStyle(fontSize: 50,),):Text('ホイ！',style: TextStyle(fontSize: 60,),),
-                  SizedBox(
-                    height: 25,
-                  ),
-                  // CircleAvatar(
-                  //   radius: 80,
-                  //   backgroundImage://　アイコンを変更　//URLの画像に設定
-                  //   NetworkImage('https://ukiuki.itembox.design/item/img/osaru/img_header_icon.png'),
-                  // ),
-                  // SizedBox(
-                  //   height: 30
-                  //   ,
-                  // ),
+                  
                   Container( 
                     height: 200,
                     child: computerFace),
                 
                   Container(
-                    height: 100,
                     child:Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                     children: <Widget>[
-                      Container(
-                          color: Colors.black,
-                          height: 7,
-                          width: 140,
-                        ),
+                      children: <Widget>[
+                      Expanded(
+                        child: Container(
+                            color: Colors.black,
+                            height: 7,
+                          ),
+                      ),
                       const Text('VS',
                       style: TextStyle(
                         fontSize: 40,
                         fontWeight: FontWeight.bold
                       ),
                       textDirection: TextDirection.ltr,),
-                      Container(
-                        color: Colors.black,
-                        height: 7,
-                        width: 140,
+                      Expanded(
+                        child: Container(
+                          color: Colors.black,
+                          height: 7,
+                        ),
                       )
                       ],
                     )
                   ),
-                Text(
-                  myHand,
-                  style: TextStyle(
-                    fontSize: 80,
-                  ),
-                  ),
-                  Container(
-                    height: 20,//columとRawの間に隙間を取る
-                
+                  Text(
+                    myHand,
+                    style: TextStyle(
+                      fontSize: 80,
+                    ),
                   ),
                 Container(
                   decoration: BoxDecoration(
