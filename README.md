@@ -1,8 +1,19 @@
-# あっちむいてほいアプリ
-![あっちむいてHoi-動画_AdobeExpress](https://user-images.githubusercontent.com/111294820/196626875-7c661698-e1c4-42e0-9bc8-475e15a7c371.gif)
 
 
-A new Flutter project.
+**動作画面**
+
+
+![あっちむいてHoi_ios_AdobeExpress](https://user-images.githubusercontent.com/111294820/197744632-4dcf9012-0aac-4420-81d5-c79644963ae2.gif)
+
+
+
+
+
+
+
+
+
+
 
 ## Getting Started
 
