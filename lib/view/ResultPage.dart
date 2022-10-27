@@ -34,7 +34,7 @@ class _ResultPageState extends State<ResultPage> {
                 const Text('YOU',style: TextStyle(fontSize: 100),),
               SecondResult == '勝ち' ?
                 Text('WIN',style: TextStyle(fontSize: 150,color: Colors.red),):
-                Text('LOSE',style: TextStyle(fontSize: 150,color: Colors.blue),
+                Text('LOSE',style: TextStyle(fontSize: 120,color: Colors.blue),
                 ),
 
               ],
